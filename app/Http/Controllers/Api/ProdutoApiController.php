@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Models\Produto;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use App\Models\Cliente;
 
 class ProdutoApiController extends Controller
 {

@@ -27,6 +27,7 @@ class Cliente extends Model
     {
         return $this->hasOne(Vinculo::class, 'cliente_id', 'id');
     }
+
     public function produto()
     {
         return $this->hasMany(Produto::class, 'cliente_id', 'id');

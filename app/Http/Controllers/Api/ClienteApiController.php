@@ -7,6 +7,7 @@ use App\Models\Models\Produto;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 
+
 class ClienteApiController extends Controller
 {
     public function __construct(Cliente $cliente, Request $request)
@@ -34,9 +35,18 @@ class ClienteApiController extends Controller
 
     public function vinculo($id)
     {
-        if(!$data = $this->vinculo->with('vinculo')->find($id)){
-            return response()->json (['error' => 'Nada foi encontrado'], 404);
-        }else{
+        if (!$data = $this->vinculo->with('vinculo')->find($id)) {
+            return response()->json(['error' => 'Nada foi encontrado'], 404);
+        } else {
+            return response()->json($data);
+        }
+    }
+
+    public function produto($id)
+    {
+        if (!$data = $this->produto->with('produtos')->find($id)) {
+            return response()->json(['error' => 'Nada foi encontrado'], 404);
+        } else {
             return response()->json($data);
         }
     }

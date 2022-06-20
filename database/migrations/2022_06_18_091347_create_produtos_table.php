@@ -16,13 +16,14 @@ class CreateProdutosTable extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('cliente_id')->unsigned();
             $table->string('name');
             $table->integer('size');
             $table->float('price');
             $table->string('description');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
+
 
         });
     }
