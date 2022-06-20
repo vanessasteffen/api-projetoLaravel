@@ -6,25 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
 
-class Produto extends Model
+class Vinculo extends Model
 {
     protected $fillable =
         [
-            'name',
-            'size',
-            'price',
-            'description',
-            'cliente_id'
+            'cliente_id',
+            'cpf_cnpj'
         ];
     public function rules()
     {
-    return [
-        'name' =>' required',
-        'size' => 'required',
-        'price' => 'required',
-        'description' => 'required',
-        'cliente_id' => 'required'
-    ];
+        return [
+            'cliente_id' =>' required',
+             'cpf_cnpj' => 'required|unique:vinculos',
+        ];
     }
     public function cliente(){
         return $this->belongsTo(Cliente::class, 'cliente_id', 'id');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Models\Produto;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class ProdutoApiController extends Controller
@@ -13,6 +14,15 @@ class ProdutoApiController extends Controller
     {
         $this->produto = $produto;
         $this->request = $request;
+    }
+
+    public function cliente($id)
+    {
+        if (!$data = $this->cliente->witch('cliente')->find($id)) {
+            return response()->json(['error' => 'Nada foi encontrado'], 404);
+        } else {
+            return response()->json($data);
+        }
     }
 
     public function index()
@@ -33,9 +43,9 @@ class ProdutoApiController extends Controller
     public function show($id)
     {
         //retorna os dados
-        if (!$data = $this->produto->find($id)){
-            return response()->json(['error'=>'Nada foi encontrado'], 404);
-        }else{
+        if (!$data = $this->produto->find($id)) {
+            return response()->json(['error' => 'Nada foi encontrado'], 404);
+        } else {
             return response()->json($data);
         }
     }
@@ -50,10 +60,10 @@ class ProdutoApiController extends Controller
     public function destroy($id)
     {
         //deletando algum dado pelo id
-        if (!$data = $this->produto->find($id)){
-            return response()->json(['error'=>'Nada foi encontrado'], 404);
+        if (!$data = $this->produto->find($id)) {
+            return response()->json(['error' => 'Nada foi encontrado'], 404);
         }
         $data->delete();
-        return response()->json(['Sucess'=>'Deletado com Sucesso']);
+        return response()->json(['Sucess' => 'Deletado com Sucesso']);
     }
 }

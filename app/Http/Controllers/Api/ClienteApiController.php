@@ -12,6 +12,7 @@ class ClienteApiController extends Controller
     public function __construct(Cliente $cliente, Request $request)
     {
         $this->cliente = $cliente;
+        $this->vinculo = $cliente;
         $this->request = $request;
     }
 
@@ -29,5 +30,14 @@ class ClienteApiController extends Controller
         $dataForm = $request->all();
         $data = $this->cliente->create($dataForm);
         return response()->json($data, 201);
+    }
+
+    public function vinculo($id)
+    {
+        if(!$data = $this->vinculo->with('vinculo')->find($id)){
+            return response()->json (['error' => 'Nada foi encontrado'], 404);
+        }else{
+            return response()->json($data);
+        }
     }
 }

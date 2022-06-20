@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Cliente;
 
-class CreateProdutosTable extends Migration
+class CreateVinculosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +13,12 @@ class CreateProdutosTable extends Migration
      */
     public function up()
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('vinculos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
+            $table->integer('cliente_id')->unsigned();
             $table->foreign('cliente_id')->references('id')->on('clientes')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('name');
-            $table->integer('size');
-            $table->float('price');
-            $table->string('description');
+            $table->string('cpf_cnpj', 19)->unique();;
             $table->timestamps();
-
         });
     }
 
@@ -34,6 +29,6 @@ class CreateProdutosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('vinculos');
     }
 }
