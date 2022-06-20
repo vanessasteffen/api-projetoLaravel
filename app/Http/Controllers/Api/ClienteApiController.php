@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 
 
+
 class ClienteApiController extends Controller
 {
     public function __construct(Cliente $cliente, Request $request)
@@ -15,6 +16,7 @@ class ClienteApiController extends Controller
         $this->cliente = $cliente;
         $this->vinculo = $cliente;
         $this->request = $request;
+        $this->produto = $cliente;
     }
 
     public function index()
@@ -31,6 +33,15 @@ class ClienteApiController extends Controller
         $dataForm = $request->all();
         $data = $this->cliente->create($dataForm);
         return response()->json($data, 201);
+    }
+    public function show($id)
+    {
+        //retorna os dados
+        if (!$data = $this->cliente->find($id)) {
+            return response()->json(['error' => 'Nada foi encontrado'], 404);
+        } else {
+            return response()->json($data);
+        }
     }
 
     public function vinculo($id)

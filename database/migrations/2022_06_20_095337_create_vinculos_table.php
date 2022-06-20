@@ -17,7 +17,7 @@ class CreateVinculosTable extends Migration
             $table->increments('id');
             $table->integer('cliente_id')->unsigned();
             $table->foreign('cliente_id')->references('id')->on('clientes')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('cpf_cnpj', 19)->unique();;
+            $table->string('cpf_cnpj', 19)->unique();
             $table->timestamps();
         });
     }
